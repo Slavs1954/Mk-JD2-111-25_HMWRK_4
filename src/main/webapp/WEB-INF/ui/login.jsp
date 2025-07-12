@@ -17,7 +17,7 @@
 		<input type="submit" value="Submit">
 	</form>
 
-	<p>Не зарегистрированы? 🡺<b><a href="${pageContext.request.contextPath}/api/user">Зарегестрироватся</a>🡸</b></p>
+	<p>Не зарегистрированы? 🡺<b><a href="${pageContext.request.contextPath}/api/user">Зарегистрироваться</a>🡸</b></p>
 
 	</body>
 </html>

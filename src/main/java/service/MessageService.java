@@ -20,6 +20,11 @@ public class MessageService implements IMessageService {
     }
 
     @Override
+    public int getMessageCount() {
+        return messageStorage.getMessageCount();
+    }
+
+    @Override
     public void sendMessage(Message message) {
         messageStorage.add(message);
     }

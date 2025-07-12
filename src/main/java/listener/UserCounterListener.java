@@ -1,13 +1,14 @@
 package listener;
 
+import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
 import jakarta.servlet.http.HttpSessionBindingEvent;
 import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
 
-import java.awt.event.ActionListener;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@WebListener
 public class UserCounterListener implements HttpSessionListener, HttpSessionAttributeListener {
     private static final AtomicInteger activeUsers = new AtomicInteger(0);
 

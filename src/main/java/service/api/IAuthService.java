@@ -8,4 +8,6 @@ public interface IAuthService {
     void add(User user);
     List<User> getUserInfo();
     boolean authenticateUser(String username, String password);
+
+    int getUserCount();
 }

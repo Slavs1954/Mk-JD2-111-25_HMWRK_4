@@ -1,16 +1,26 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: slavs
-  Date: 12.07.2025
-  Time: 21:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>📊 Stats</title>
 </head>
 <body>
+
+<h1>📊 Статистика приложения</h1>
+<hr/>
+
+<h2>Пользователи</h2>
+<ul>
+    <li><strong>Всего зарегистрировано пользователей:</strong> ${userCount}</li>
+    <li><strong>Сейчас активно пользователей:</strong> ${activeUserCount}</li>
+</ul>
+
+<h2>Сообщения</h2>
+<ul>
+    <li><strong>Всего сообщений отправлено:</strong> ${messageCount}</li>
+</ul>
+
+<hr/>
+<p><strong>Отчёт от:</strong> <%= new java.util.Date() %></p>
 
 </body>
 </html>
