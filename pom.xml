@@ -7,11 +7,15 @@
     <groupId>org.example</groupId>
     <artifactId>mvn4</artifactId>
     <version>1.0-AUTH-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.tomcat.uri>http:localhost:8080/manager/text</maven.tomcat.uri>
+        <maven.tomcat.server>TomcatServer10</maven.tomcat.server>
+        <maven.tomcat.path>/${project.build.finalName}</maven.tomcat.path>
     </properties>
 
     <dependencies>
