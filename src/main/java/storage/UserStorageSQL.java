@@ -54,7 +54,7 @@ public class UserStorageSQL implements IUserStorage {
                              SELECT username, password, full_name, birth_date, registration_date, role
                              	FROM auth_app.users;
                      """);
-             ResultSet resultSet = statement.executeQuery();) {
+             ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 result.add(User.builder()
                         .username(resultSet.getString("username"))
@@ -81,8 +81,8 @@ public class UserStorageSQL implements IUserStorage {
                              SELECT username, password, full_name, birth_date, registration_date, role
                              	FROM auth_app.users
                              WHERE username = ? AND password = ?;
-                     """);
-             ) {
+                     """)
+        ) {
             statement.setObject(1, username);
             statement.setObject(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -114,7 +114,7 @@ public class UserStorageSQL implements IUserStorage {
                              SELECT username, password, full_name, birth_date, registration_date, role
                              	FROM auth_app.users
                              WHERE username = ? AND password = ?;
-                     """);
+                     """)
         ) {
             statement.setObject(1, username);
             statement.setObject(2, password);
@@ -126,5 +126,25 @@ public class UserStorageSQL implements IUserStorage {
         } catch (SQLException e) {
             throw new StorageException("ERR: FAILED TO RETRIEVE USER", e);
         }
+    }
+
+    @Override
+    public int getUserCount() {
+        List<User> result = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement("""
+                             SELECT Count(*)
+                             	FROM auth_app.users;
+                     """);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new StorageException("ERR: FAILED TO COUNT USERS", e);
+        }
+        return -1;
     }
 }

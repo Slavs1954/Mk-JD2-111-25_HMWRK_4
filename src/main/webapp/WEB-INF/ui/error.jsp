@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: slavs
-  Date: 12.07.2025
-  Time: 19:04
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          language="java" %>
@@ -16,10 +9,10 @@
 
 <body>
 
-<h1 style="text-align: center;">🚨 Something went wrong</h1>
+<h1 style="text-align: center;">🚨 Что-то пошло не так</h1>
 
 <p style="text-align: center;">
-    Your request couldn't be completed.
+    Ваш запрос не мог быть обработан.
 </p>
 
 <hr>
@@ -29,10 +22,10 @@
 
 <hr>
 
-<p>That's all we know.</p>
+<p>Это всё что известно.</p>
 
 <p>
-    🔙 <a href="<%= request.getContextPath() %>/api/user">Return to the main page</a>
+    🔙 <a href="${pageContext.request.contextPath}/api/user">Вернуться на главную страницу</a>
 </p>
 
 </body>

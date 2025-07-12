@@ -53,11 +53,11 @@ public class MessageStorageSQL implements IMessageStorage {
                      SELECT sender, receiver, message, dt_send
                          FROM auth_app.messages
                      WHERE receiver = ?
-                     """);
-             ) {
+                     """)
+        ) {
 
             statement.setString(1, username);
-            try(ResultSet resultSet = statement.executeQuery();) {
+            try(ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     result.add(Message.builder()
                             .sender(resultSet.getString("sender"))
@@ -72,5 +72,25 @@ public class MessageStorageSQL implements IMessageStorage {
             throw new StorageException("ERR: FAILED TO RETRIEVE MESSAGES FOR " + username, e);
         }
         return result;
+    }
+
+    @Override
+    public int getMessageCount() {
+        List<User> result = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement("""
+                             SELECT Count(*)
+                             	FROM auth_app.messages;
+                     """);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new StorageException("ERR: FAILED TO COUNT MESSAGES", e);
+        }
+        return -1;
     }
 }

@@ -31,8 +31,7 @@ public class LoginServlet extends HttpServlet {
             req.getSession().setAttribute("user", username);
         }
         else {
-            req.setAttribute("errMsg", "Login Failed");
-            req.getRequestDispatcher("/WEB-INF/ui/error.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/ui/login_fail.jsp").forward(req, resp);
         }
 
     }

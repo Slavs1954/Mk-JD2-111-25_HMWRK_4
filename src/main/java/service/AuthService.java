@@ -27,7 +27,12 @@ public class AuthService implements IAuthService {
     public boolean authenticateUser(String username, String password) {
         if (userStorage.isValidUser(username, password)) {
             return true;
-        };
+        }
         return false;
+    }
+
+    @Override
+    public int getUserCount() {
+        return userStorage.getUserCount();
     }
 }

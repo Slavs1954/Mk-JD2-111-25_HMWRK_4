@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IMessageStorage {
 
-    public void add(Message message);
-    public List<Message> getUserMessages(String username);
+    void add(Message message);
+    List<Message> getUserMessages(String username);
+    int getMessageCount();
 }

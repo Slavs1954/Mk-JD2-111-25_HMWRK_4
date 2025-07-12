@@ -1,16 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: slavs
-  Date: 12.07.2025
-  Time: 21:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login failed</title>
 </head>
 <body>
+<h1>Неверные данные</h1>
 
+<p>
+    Ваш логин или пароль неверны, пожалуйста попробуйте снова
+</p>
+🔙 <a href="${pageContext.request.contextPath}/api/login">Вернутся</a>
 </body>
 </html>
