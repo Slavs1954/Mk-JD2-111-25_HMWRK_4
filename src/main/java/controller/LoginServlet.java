@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 
 
 
-        req.getRequestDispatcher("../WEB-INF/ui/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/ui/signIn.jsp").forward(req, resp);
     }
 
     @Override
@@ -31,8 +31,11 @@ public class LoginServlet extends HttpServlet {
             req.getSession().setAttribute("user", username);
         }
         else {
-            req.getRequestDispatcher("/WEB-INF/ui/login_fail.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/ui/signIn_fail.jsp").forward(req, resp);
+            return;
         }
+
+        resp.sendRedirect(req.getContextPath().concat("/ui/user/chats"));
 
     }
 }

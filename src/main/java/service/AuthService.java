@@ -35,4 +35,14 @@ public class AuthService implements IAuthService {
     public int getUserCount() {
         return userStorage.getUserCount();
     }
+
+    @Override
+    public List<String> getOtherUsernames(String username) {
+        return userStorage.getOtherUsernames(username);
+    }
+
+    @Override
+    public boolean isAdmin(String username) {
+        return userStorage.isAdmin(username);
+    }
 }

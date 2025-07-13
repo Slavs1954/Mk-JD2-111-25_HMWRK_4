@@ -25,7 +25,7 @@
 <p>Это всё что известно.</p>
 
 <p>
-    🔙 <a href="${pageContext.request.contextPath}/api/user">Вернуться на главную страницу</a>
+    🔙 <a href="${pageContext.request.contextPath}/ui">Вернуться на главную страницу</a>
 </p>
 
 </body>

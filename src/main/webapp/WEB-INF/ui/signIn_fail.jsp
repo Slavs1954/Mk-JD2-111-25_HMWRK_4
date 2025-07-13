@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"
+         language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>Login failed</title>
@@ -9,6 +12,6 @@
 <p>
     Ваш логин или пароль неверны, пожалуйста попробуйте снова
 </p>
-🔙 <a href="${pageContext.request.contextPath}/api/login">Вернутся</a>
+🔙 <a href="${pageContext.request.contextPath}/ui/signIn">Вернутся</a>
 </body>
 </html>

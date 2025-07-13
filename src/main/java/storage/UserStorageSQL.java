@@ -107,8 +107,6 @@ public class UserStorageSQL implements IUserStorage {
 
     @Override
     public boolean isValidUser(String username, String password) {
-        User result = null;
-
         try (Connection conn = dataSource.getConnection();
              PreparedStatement statement = conn.prepareStatement("""
                              SELECT username, password, full_name, birth_date, registration_date, role
@@ -146,5 +144,53 @@ public class UserStorageSQL implements IUserStorage {
             throw new StorageException("ERR: FAILED TO COUNT USERS", e);
         }
         return -1;
+    }
+
+    @Override
+    public List<String> getOtherUsernames(String username) {
+        List<String> result = new ArrayList<>();
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement("""
+                             SELECT username, password, full_name, birth_date, registration_date, role
+                             	FROM auth_app.users
+                             WHERE username <> ?;
+                     """)
+        ) {
+            statement.setObject(1, username);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    result.add(resultSet.getString("username"));
+                }
+
+
+            } catch (Exception e) {
+                throw new StorageException("ERR: FAILED TO RETRIEVE OTHER USERS", e);
+            }
+            return result;
+        } catch (Exception e) {
+            throw new StorageException("ERR: FAILED TO RETRIEVE OTHER USERS", e);
+        }
+    }
+
+    @Override
+    public boolean isAdmin(String username) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement("""
+                             SELECT username, password, full_name, birth_date, registration_date, role
+                             	FROM auth_app.users
+                             WHERE username = ? AND role = ?;
+                     """)
+        ) {
+            statement.setObject(1, username);
+            statement.setObject(2, ERole.ADMIN.toString());
+            try (ResultSet resultSet = statement.executeQuery()) {
+                return resultSet.next();
+            }
+
+
+        } catch (SQLException e) {
+            throw new StorageException("ERR: FAILED TO RETRIEVE USER ROLE", e);
+        }
     }
 }
