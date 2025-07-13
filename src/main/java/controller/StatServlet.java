@@ -25,6 +25,6 @@ public class StatServlet extends HttpServlet {
         req.setAttribute("messageCount", messageService.getMessageCount());
         req.setAttribute("activeUserCount", UserCounterListener.getActiveUsers());
 
-        req.getRequestDispatcher("../../WEB-INF/ui/stats.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/ui/admin/statistics.jsp").forward(req, resp);
     }
 }

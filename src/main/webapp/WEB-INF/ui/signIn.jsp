@@ -14,10 +14,10 @@
 		<input type="text" id="username" name="username" required="required"><br><br>
 		<label for="password">Пароль</label>
 		<input type="text" id="password" name="password" required="required"><br><br>
-		<input type="submit" value="Submit">
+		<input type="submit" value="Отправить">
 	</form>
 
-	<p>Не зарегистрированы? 🡺<b><a href="${pageContext.request.contextPath}/api/user">Зарегистрироваться</a>🡸</b></p>
+	<p>Не зарегистрированы? <b><a href="${pageContext.request.contextPath}/ui/signUp">🡺Зарегистрироваться🡸</a></b></p>
 
 	</body>
 </html>

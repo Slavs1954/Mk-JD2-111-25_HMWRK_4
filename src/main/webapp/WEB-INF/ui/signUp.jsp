@@ -18,10 +18,10 @@
             <input type="text" id="fullName" name="fullName"><br><br>
             <label for="dtBirth">Дата рождения</label>
             <input type="date" id="dtBirth" name="dtBirth"><br><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Отправить">
         </form>
 
-        <p>Уже зарегистрированы? 🡺<b><a href="${pageContext.request.contextPath}/api/login">Войти</a>🡸</b></p>
+        <p>Уже зарегистрированы? <b><a href="${pageContext.request.contextPath}/ui/signIn">🡺Войти🡸</a></b></p>
 
 	</body>
 </html>

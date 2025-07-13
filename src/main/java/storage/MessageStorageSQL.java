@@ -69,7 +69,7 @@ public class MessageStorageSQL implements IMessageStorage {
             }
 
         } catch (SQLException e) {
-            throw new StorageException("ERR: FAILED TO RETRIEVE MESSAGES FOR " + username, e);
+            throw new StorageException("ERR: FAILED TO RETRIEVE MESSAGES FOR ".concat(username), e);
         }
         return result;
     }

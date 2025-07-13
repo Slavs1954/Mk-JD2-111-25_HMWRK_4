@@ -15,12 +15,27 @@ public class StorageFactory {
     }
     private final static DataSource dataSource;
     static {
+
+        String dbUrl = System.getenv("DB_URL");
+        if (dbUrl == null || dbUrl.isEmpty()) {
+            dbUrl = "jdbc:postgresql://localhost:5432/auth";
+        }
+        String dbUser = System.getenv("DB_USER");
+        if (dbUser == null || dbUser.isEmpty()) {
+            dbUser = "postgres";
+        }
+        String dbPassword = System.getenv("DB_PASSWORD");
+        if (dbPassword == null || dbPassword.isEmpty()) {
+            dbPassword = "postgres";
+        }
+
         try {
+
             ComboPooledDataSource cpds = new ComboPooledDataSource();
             cpds.setDriverClass("org.postgresql.Driver");
-            cpds.setJdbcUrl("jdbc:postgresql://localhost:5432/auth");
-            cpds.setUser("postgres");
-            cpds.setPassword("postgres");
+            cpds.setJdbcUrl(dbUrl);
+            cpds.setUser(dbUser);
+            cpds.setPassword(dbPassword);
 
             dataSource = cpds;
         } catch (Exception e) {

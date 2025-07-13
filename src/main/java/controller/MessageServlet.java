@@ -18,13 +18,14 @@ public class MessageServlet extends HttpServlet {
     private final IMessageService messageService = ServiceFactory.getMessageService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        messageService.getUserMessages(username);
+        String username = req.getSession().getAttribute("user").toString();
+        req.setAttribute("messages", messageService.getUserMessages(username));
+        req.getRequestDispatcher("/WEB-INF/ui/user/chats.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
+        String username = req.getSession().getAttribute("user").toString();
         String message = req.getParameter("message");
         String receiver = req.getParameter("receiver");
         messageService.sendMessage(Message.builder()
@@ -33,5 +34,6 @@ public class MessageServlet extends HttpServlet {
                 .message(message)
                 .dtSend(LocalDateTime.now())
                 .build());
+        resp.sendRedirect(req.getContextPath().concat("/ui/user/message"));
     }
 }

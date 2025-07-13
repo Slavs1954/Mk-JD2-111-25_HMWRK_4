@@ -5,4 +5,13 @@
          metadata-complete="false"
          version="6.0">
     <display-name>M-JD2-XXX-XX</display-name>
+
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <jsp-file>/WEB-INF/ui/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/ui</url-pattern>
+    </servlet-mapping>
 </web-app>

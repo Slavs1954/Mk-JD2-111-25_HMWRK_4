@@ -24,7 +24,7 @@ public class RegistrationServlet extends HttpServlet {
 
 
 
-        req.getRequestDispatcher("../WEB-INF/ui/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/ui/signUp.jsp").forward(req, resp);
     }
 
     @Override
@@ -42,5 +42,6 @@ public class RegistrationServlet extends HttpServlet {
                 .registrationDate(LocalDateTime.now())
                 .role(ERole.USER)
                 .build());
+        resp.sendRedirect(req.getContextPath().concat("/ui/signIn"));
     }
 }

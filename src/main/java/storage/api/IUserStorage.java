@@ -10,4 +10,6 @@ public interface IUserStorage {
     boolean isValidUser(String username, String password);
     List<User> getAll();
     int getUserCount();
+    List<String> getOtherUsernames(String username);
+    boolean isAdmin(String username);
 }
