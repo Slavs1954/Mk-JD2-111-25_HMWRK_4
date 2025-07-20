@@ -20,8 +20,8 @@ public class UiDispatcherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo();
-        boolean isRedirectScheduled = false;
-        if (path == null) {
+
+        if (path == null || path.isEmpty() || path.equals("/")) {
             path = "/";
         }
         String jspPath = "index.jsp";
@@ -29,8 +29,7 @@ public class UiDispatcherServlet extends HttpServlet {
         switch (path) {
             case "/":
                 resp.sendRedirect(req.getContextPath().concat("/ui"));
-                isRedirectScheduled = true;
-                break;
+                return;
             case "/ui":
                 break;
             case "/signIn":
@@ -55,9 +54,7 @@ public class UiDispatcherServlet extends HttpServlet {
                 jspPath = "error.jsp";
                 break;
         }
-        if (!isRedirectScheduled) {
-            req.getRequestDispatcher("/WEB-INF/ui/".concat(jspPath)).forward(req, resp);
-        }
+        req.getRequestDispatcher("/WEB-INF/ui/".concat(jspPath)).forward(req, resp);
 
     }
 }
