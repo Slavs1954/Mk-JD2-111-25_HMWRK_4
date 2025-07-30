@@ -7,6 +7,7 @@ This is a small Java project that emulates a simple chat system using **Tomcat**
 ### 🛠 Technologies Used
 
 - Java + Servlet API
+- Spring Framework (core DI)
 - Apache Tomcat
 - PostgreSQL
 - Maven (build tool)
@@ -33,7 +34,8 @@ This is a small Java project that emulates a simple chat system using **Tomcat**
 
 ### 🛠 Используемые технологии
 
-- Java + Servlet API  
+- Java + Servlet API
+- Spring Framework (core DI)
 - Apache Tomcat  
 - PostgreSQL  
 - Maven (система сборки)
