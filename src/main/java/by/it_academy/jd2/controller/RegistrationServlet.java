@@ -3,6 +3,7 @@ package by.it_academy.jd2.controller;
 import by.it_academy.jd2.core.ContextFactory;
 import by.it_academy.jd2.core.dto.ERole;
 import by.it_academy.jd2.core.dto.User;
+import by.it_academy.jd2.validation.api.exceptions.ValidationException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,10 +37,15 @@ public class RegistrationServlet extends HttpServlet {
                 .role(ERole.USER)
                 .build());
         }
+        catch(ValidationException e){
+            resp.sendRedirect(req.getContextPath().concat("/ui/signUp?errMsg=").concat(e.getMessage()));
+            return;
+        }
         catch(Exception e){
             resp.sendRedirect(req.getContextPath().concat("/ui/error?errMsg=").concat(e.getMessage()));
             return;
         }
+
         resp.sendRedirect(req.getContextPath().concat("/ui/signIn"));
     }
 }

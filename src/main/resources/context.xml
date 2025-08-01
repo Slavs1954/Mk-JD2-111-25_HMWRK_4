@@ -19,6 +19,8 @@
     </bean>
     <bean id="authService" class="by.it_academy.jd2.service.AuthService">
         <constructor-arg name="userStorage" ref="userStorageSQL"/>
+        <constructor-arg name="userIValidator" ref="userValidator"/>
+        <constructor-arg name="authUserIValidator" ref="authUserValidator"/>
     </bean>
     <bean id="messageService" class="by.it_academy.jd2.service.MessageService">
         <constructor-arg name="messageStorage" ref="messageStorageSQL"/>
@@ -26,5 +28,7 @@
     <bean id="statService" class="by.it_academy.jd2.service.StatService">
         <constructor-arg name="userStorage" ref="userStorageSQL"/>
     </bean>
+    <bean id="userValidator" class="by.it_academy.jd2.validation.UserValidator"/>
+    <bean id="authUserValidator" class="by.it_academy.jd2.validation.AuthUserValidator"/>
 
 </beans>

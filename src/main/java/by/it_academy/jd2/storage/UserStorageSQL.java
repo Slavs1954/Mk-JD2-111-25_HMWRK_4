@@ -135,27 +135,6 @@ public class UserStorageSQL implements IUserStorage {
     }
 
     @Override
-    public boolean isValidUser(String username, String password) {
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement statement = conn.prepareStatement("""
-                             SELECT username, password, full_name, birth_date, registration_date, role
-                             	FROM auth_app.users
-                             WHERE username = ? AND password = ?;
-                     """)
-        ) {
-            statement.setObject(1, username);
-            statement.setObject(2, password);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                return resultSet.next();
-            }
-
-
-        } catch (SQLException e) {
-            throw new StorageException("ERR: FAILED TO RETRIEVE USER", e);
-        }
-    }
-
-    @Override
     public int count() {
         List<User> result = new ArrayList<>();
 

@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         if(!authService.authenticate(username, password)) {
-            req.getRequestDispatcher("/WEB-INF/ui/signIn_fail.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath().concat("/ui/signIn?errMsg=Invalid%20username%20or%20password"));
             return;
         }
 

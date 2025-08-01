@@ -9,6 +9,11 @@
 		<title>Тег FORM</title>
 	</head>
 	<body>
+    <c:if test="${not empty errMsg}">
+        <div style="color: red">
+            <pre>${errMsg}</pre>
+        </div>
+    </c:if>
         <form action="${pageContext.request.contextPath}/api/user" method="POST">
             <label for="username">Логин:</label>
             <input type="text" id="username" name="username" required="required"><br><br>

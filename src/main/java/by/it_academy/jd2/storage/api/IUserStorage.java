@@ -9,7 +9,6 @@ public interface IUserStorage {
     void add(User user);
     User getUser(String username, String password);
     AuthUser getAuthUser(String username, String password);
-    boolean isValidUser(String username, String password);
     List<User> getAll();
 
     /**

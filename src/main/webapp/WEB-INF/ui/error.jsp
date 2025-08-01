@@ -18,7 +18,7 @@
 <hr>
 
 <h2>Error Details:</h2>
-<p>${errMsg}</p>
+<pre>${errMsg}</pre>
 
 <hr>
 
