@@ -4,6 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- DataSource -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="org.postgresql.Driver"/>
         <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/auth"/>
@@ -11,12 +12,15 @@
         <property name="password" value="postgres"/>
     </bean>
 
+    <!-- Storages -->
     <bean id="userStorageSQL" class="by.it_academy.jd2.storage.UserStorageSQL">
         <constructor-arg name="dataSource" ref="dataSource" />
     </bean>
     <bean id="messageStorageSQL" class="by.it_academy.jd2.storage.MessageStorageSQL">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
+
+    <!-- Services -->
     <bean id="authService" class="by.it_academy.jd2.service.AuthService">
         <constructor-arg name="userStorage" ref="userStorageSQL"/>
         <constructor-arg name="userIValidator" ref="userValidator"/>
@@ -28,6 +32,7 @@
     <bean id="statService" class="by.it_academy.jd2.service.StatService">
         <constructor-arg name="userStorage" ref="userStorageSQL"/>
     </bean>
+    <!-- Validators -->
     <bean id="userValidator" class="by.it_academy.jd2.validation.UserValidator"/>
     <bean id="authUserValidator" class="by.it_academy.jd2.validation.AuthUserValidator"/>
 
