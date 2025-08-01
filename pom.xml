@@ -7,7 +7,7 @@
 
     <groupId>by.it_academy.jd2</groupId>
     <artifactId>mvn4</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>

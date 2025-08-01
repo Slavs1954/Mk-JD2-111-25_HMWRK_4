@@ -3,10 +3,10 @@ package by.it_academy.jd2.core.dto;
 import java.time.LocalDateTime;
 
 public class Message {
-    public LocalDateTime dtSend;
-    public String sender;
-    public String receiver;
-    public String message;
+    private final LocalDateTime dtSend;
+    private final String sender;
+    private final String receiver;
+    private final String message;
     private Message(LocalDateTime dtSend, String sender, String receiver, String message) {
         this.dtSend = dtSend;
         this.sender = sender;
@@ -34,10 +34,10 @@ public class Message {
     }
 
     public static class Builder {
-        public LocalDateTime dtSend;
-        public String sender;
-        public String receiver;
-        public String message;
+        private LocalDateTime dtSend;
+        private String sender;
+        private String receiver;
+        private String message;
         public Builder dtSend(LocalDateTime dtSend) {
             this.dtSend = dtSend;
             return this;

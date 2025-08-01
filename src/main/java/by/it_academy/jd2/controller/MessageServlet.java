@@ -25,7 +25,7 @@ public class MessageServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         messageService.sendMessage(Message.builder()
                 .sender(((AuthUser) req.getSession().getAttribute("user")).getUsername())
                 .receiver(req.getParameter("receiver"))
