@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import by.it_academy.jd2.service.api.IAuthService;
 import by.it_academy.jd2.service.api.IMessageService;
 
-import javax.naming.Context;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/", "/ui/*"})

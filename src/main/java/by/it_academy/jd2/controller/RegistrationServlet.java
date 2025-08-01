@@ -26,7 +26,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try{
         authService.add(User.builder()
                 .username(req.getParameter("username"))
