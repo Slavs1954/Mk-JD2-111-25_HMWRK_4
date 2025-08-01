@@ -39,9 +39,11 @@ public class UiDispatcherServlet extends HttpServlet {
             case "/", "/ui":
                 break;
             case "/signIn":
+                req.setAttribute("errMsg", req.getParameter("errMsg"));
                 jspPath = "signIn.jsp";
                 break;
             case "/signUp":
+                req.setAttribute("errMsg", req.getParameter("errMsg"));
                 jspPath = "signUp.jsp";
                 break;
             case "/user/message":
