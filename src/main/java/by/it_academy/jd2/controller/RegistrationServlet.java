@@ -2,16 +2,18 @@ package by.it_academy.jd2.controller;
 
 import by.it_academy.jd2.core.dto.ERole;
 import by.it_academy.jd2.core.dto.User;
+import by.it_academy.jd2.validation.api.exceptions.ValidationException;
 import jakarta.servlet.http.HttpServlet;
 import by.it_academy.jd2.service.api.IAuthService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@RestController
-@RequestMapping(path = {"/ui/user", "/api/user"})
+@Controller
 public class RegistrationServlet extends HttpServlet {
 
     private final IAuthService authService;
@@ -20,14 +22,15 @@ public class RegistrationServlet extends HttpServlet {
         this.authService = authService;
     }
 
-    @GetMapping("/ui/user")
+    @GetMapping("/ui/signUp")
     protected String doGet() {
         return "signUp";
     }
 
     @PostMapping("/api/user")
     protected String doPost(@RequestParam("username") String username, @RequestParam("password") String password,
-                          @RequestParam("fullName") String fullName, @RequestParam("dtBirth") LocalDate dtBirth, RedirectAttributes redirectAttributes) {
+                          @RequestParam("fullName") String fullName, @RequestParam("dtBirth") LocalDate dtBirth,
+                            RedirectAttributes redirectAttributes, Model model) {
 
         try{
         authService.add(User.builder()
@@ -38,6 +41,10 @@ public class RegistrationServlet extends HttpServlet {
                 .registrationDate(LocalDateTime.now())
                 .role(ERole.USER)
                 .build());
+        }
+        catch (ValidationException e) {
+            model.addAttribute("errMsg", e.getMessage());
+            return "signUp";
         }
         catch(Exception e){
             redirectAttributes.addFlashAttribute("errMsg", e.getMessage());

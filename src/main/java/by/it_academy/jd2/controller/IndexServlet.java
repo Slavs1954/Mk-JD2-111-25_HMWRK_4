@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexServlet {
 
-    @GetMapping(path = {"/", ""})
+    @GetMapping(path = {"/", "", "/ui", "/ui/"})
     public String redirect() {
         return "redirect:/ui/index";
     }

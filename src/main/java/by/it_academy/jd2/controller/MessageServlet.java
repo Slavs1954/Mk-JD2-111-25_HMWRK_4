@@ -2,27 +2,39 @@ package by.it_academy.jd2.controller;
 
 import by.it_academy.jd2.core.dto.AuthUser;
 import by.it_academy.jd2.core.dto.Message;
+import by.it_academy.jd2.service.AuthService;
+import by.it_academy.jd2.service.api.IAuthService;
 import by.it_academy.jd2.service.api.IMessageService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
-@RestController
-@RequestMapping(path = {"/ui/message", "/api/message"})
+@Controller
 public class MessageServlet {
 
     private final IMessageService messageService;
+    private final IAuthService authService;
 
-    MessageServlet(IMessageService messageService) {
+    MessageServlet(IMessageService messageService, IAuthService authService) {
         this.messageService = messageService;
+        this.authService = authService;
     }
 
-    @GetMapping("/ui/message")
-    protected String doGet(@RequestParam("user") AuthUser user, Model model) {
+    @GetMapping("/ui/user/message")
+    protected String getMessageForm(Model model, HttpSession session) {
+        AuthUser user = (AuthUser) session.getAttribute("user");
+        model.addAttribute("receivers", authService.getOtherUsernames(user.getUsername()));
+        return "user/message";
+    }
+
+    @GetMapping("/ui/user/chats")
+    protected String showChats( HttpSession session, Model model) {
+        AuthUser user = (AuthUser) session.getAttribute("user");
         model.addAttribute("messages", messageService.getUserMessages(user.getUsername()));
-        return "chats";
+        return "user/chats";
     }
 
     @PostMapping("/api/message")

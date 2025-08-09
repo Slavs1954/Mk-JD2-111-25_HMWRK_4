@@ -22,7 +22,7 @@ public class UserSecurityFilter implements Filter {
             chain.doFilter(request, response);
         }
         else {
-            res.sendRedirect(contextPath + "/signIn");
+            res.sendRedirect(contextPath + "/ui/signIn");
         }
     }
 }

@@ -40,7 +40,7 @@ public class AdminSecurityFilter implements Filter {
             chain.doFilter(request, response);
         }
         else  {
-            res.sendRedirect(req.getContextPath() + "/signIn");
+            res.sendRedirect(req.getContextPath() + "/ui/signIn");
         }
     }
 }

@@ -3,13 +3,13 @@ package by.it_academy.jd2.controller;
 import by.it_academy.jd2.service.api.IStatService;
 import jakarta.servlet.http.HttpServlet;
 import by.it_academy.jd2.service.api.IMessageService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/ui/admin/statistics")
+@Controller
 
 public class StatServlet extends HttpServlet {
 
@@ -28,6 +28,6 @@ public class StatServlet extends HttpServlet {
         model.addAttribute("messageCount", messageService.getMessageCount());
         model.addAttribute("activeUserCount", statService.getActiveUsers());
 
-        return "statistics";
+        return "admin/statistics";
     }
 }
