@@ -1,51 +1,56 @@
 package by.it_academy.jd2.controller;
 
-import by.it_academy.jd2.core.ContextFactory;
 import by.it_academy.jd2.core.dto.ERole;
 import by.it_academy.jd2.core.dto.User;
 import by.it_academy.jd2.validation.api.exceptions.ValidationException;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import by.it_academy.jd2.service.api.IAuthService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@WebServlet(urlPatterns = "/api/user")
+@Controller
 public class RegistrationServlet extends HttpServlet {
 
-    private final IAuthService authService = ContextFactory.getBean(IAuthService.class);
+    private final IAuthService authService;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/ui/signUp.jsp").forward(req, resp);
+    RegistrationServlet(IAuthService authService) {
+        this.authService = authService;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    @GetMapping("/ui/signUp")
+    protected String doGet() {
+        return "signUp";
+    }
+
+    @PostMapping("/api/user")
+    protected String doPost(@RequestParam("username") String username, @RequestParam("password") String password,
+                          @RequestParam("fullName") String fullName, @RequestParam("dtBirth") LocalDate dtBirth,
+                            RedirectAttributes redirectAttributes, Model model) {
+
         try{
         authService.add(User.builder()
-                .username(req.getParameter("username"))
-                .password(req.getParameter("password"))
-                .fullName(req.getParameter("fullName"))
-                .birthDate(LocalDate.parse(req.getParameter("dtBirth")))
+                .username(username)
+                .password(password)
+                .fullName(fullName)
+                .birthDate(dtBirth)
                 .registrationDate(LocalDateTime.now())
                 .role(ERole.USER)
                 .build());
         }
-        catch(ValidationException e){
-            resp.sendRedirect(req.getContextPath().concat("/ui/signUp?errMsg=").concat(e.getMessage()));
-            return;
+        catch (ValidationException e) {
+            model.addAttribute("errMsg", e.getMessage());
+            return "signUp";
         }
         catch(Exception e){
-            resp.sendRedirect(req.getContextPath().concat("/ui/error?errMsg=").concat(e.getMessage()));
-            return;
+            redirectAttributes.addFlashAttribute("errMsg", e.getMessage());
+            return "error";
         }
 
-        resp.sendRedirect(req.getContextPath().concat("/ui/signIn"));
+        return "redirect:/ui/signIn";
     }
 }

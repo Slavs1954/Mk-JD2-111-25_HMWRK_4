@@ -25,7 +25,7 @@ This is a small Java project that emulates a simple chat system using **Tomcat**
   ```bash
   mvn clean package
   ```
-3. Deploy the generated `target/mvn4-1.2.1-SNAPSHOT.war` to your Tomcat webapps directory.
+3. Deploy the generated `target/mvn4-2.0.0-SNAPSHOT.war` to your Tomcat webapps directory.
 4. Start Tomcat and access the app in your browser.
 
 ## 🇷🇺 Русский
@@ -53,5 +53,5 @@ This is a small Java project that emulates a simple chat system using **Tomcat**
    ```bash
    mvn clean package
    ```
-3. Поместите полученный файл `target/mvn4-1.2.1-SNAPSHOT.war` в папку `webapps` вашего Tomcat-сервера.  
+3. Поместите полученный файл `target/mvn4-2.0.0-SNAPSHOT.war` в папку `webapps` вашего Tomcat-сервера.  
 4. Запустите Tomcat и откройте приложение в браузере.

@@ -1,37 +1,36 @@
 package by.it_academy.jd2.controller;
 
-import by.it_academy.jd2.core.ContextFactory;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import by.it_academy.jd2.service.api.IAuthService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
+@Controller
+public class LoginServlet {
 
-@WebServlet(urlPatterns = "/api/login")
-public class LoginServlet extends HttpServlet {
+    private final IAuthService authService;
 
-    private final IAuthService authService = ContextFactory.getBean(IAuthService.class);
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/ui/signIn.jsp").forward(req, resp);
+    LoginServlet(IAuthService authService) {
+        this.authService = authService;
+    }
+    @GetMapping("/ui/signIn")
+    protected String doGet(){
+        return "signIn";
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+    @PostMapping("/api/login")
+    protected String doPost(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session, Model model){
 
         if(!authService.authenticate(username, password)) {
-            resp.sendRedirect(req.getContextPath().concat("/ui/signIn?errMsg=Invalid%20username%20or%20password"));
-            return;
+            model.addAttribute("errMsg", "Invalid username or password");
+            return "signIn";
         }
 
-        req.getSession().setAttribute("user", authService.getAuthUser(username, password));
+        session.setAttribute("user", authService.getAuthUser(username, password));
 
-        resp.sendRedirect(req.getContextPath().concat("/ui/user/chats"));
+        return "redirect:/ui/user/chats";
 
     }
 }

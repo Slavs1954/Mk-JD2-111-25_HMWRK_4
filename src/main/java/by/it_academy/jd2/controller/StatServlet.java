@@ -1,31 +1,33 @@
 package by.it_academy.jd2.controller;
 
-import by.it_academy.jd2.core.ContextFactory;
-
 import by.it_academy.jd2.service.api.IStatService;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import by.it_academy.jd2.service.api.IMessageService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@Controller
 
-import java.io.IOException;
-
-@WebServlet(urlPatterns = "/api/admin/statistics")
 public class StatServlet extends HttpServlet {
 
-    private static final IStatService statService = ContextFactory.getBean(IStatService.class);
-    private final IMessageService messageService = ContextFactory.getBean(IMessageService.class);
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private final IStatService statService;
+    private final IMessageService messageService;
 
+    StatServlet(IStatService statService, IMessageService messageService) {
+        this.statService = statService;
+        this.messageService = messageService;
+    }
 
-        req.setAttribute("userCount", statService.getUserCount());
-        req.setAttribute("messageCount", messageService.getMessageCount());
-        req.setAttribute("activeUserCount", statService.getActiveUsers());
+    @GetMapping("/ui/admin/statistics")
+    protected String doGet(Model model) {
 
-        req.getRequestDispatcher("/WEB-INF/ui/admin/statistics.jsp").forward(req, resp);
+        model.addAttribute("userCount", statService.getUserCount());
+        model.addAttribute("messageCount", messageService.getMessageCount());
+        model.addAttribute("activeUserCount", statService.getActiveUsers());
+
+        return "admin/statistics";
     }
 }
